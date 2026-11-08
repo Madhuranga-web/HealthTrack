@@ -1,0 +1,13 @@
+sequenceDiagram
+  actor Trainer
+  participant Plans as PlansController
+  participant Service as HealthService
+  participant DB as SQL Server
+  actor Client
+  Trainer->>Plans: POST Workout with client, title and first exercise
+  Plans->>Service: IsAssigned(trainer, client)
+  Service->>DB: Check active assignment
+  Plans->>DB: Insert WorkoutPlan and WorkoutExercise
+  Plans->>Service: Notify(client) and Activity(trainer)
+  Client->>DB: Query own assigned workout plans
+  Client->>DB: Insert own WorkoutLog

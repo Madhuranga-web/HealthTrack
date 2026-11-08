@@ -1,0 +1,15 @@
+classDiagram
+  class ApplicationUser {+string FullName +bool IsActive +DateTime CreatedUtc}
+  class ClientProfile {+string UserId +decimal HeightCm +string Goals}
+  class TrainerAssignment {+string TrainerId +string ClientId}
+  class WorkoutPlan {+string Title +string TrainerId +string ClientId}
+  class WorkoutExercise {+string Name +int Sets +int Repetitions}
+  class DietPlan {+string Title +int DailyCalorieTarget}
+  class DietPlanMeal {+string Name +int CalorieTarget +TimeOnly ScheduledTime}
+  class Appointment {+DateTime StartsUtc +int DurationMinutes +AppointmentStatus Status}
+  class HealthService {+CalculateBmi() +IsAssigned() +ValidBooking() +HasConflict() +Notify()}
+  ApplicationUser --> ClientProfile
+  ApplicationUser --> TrainerAssignment
+  WorkoutPlan *-- WorkoutExercise
+  DietPlan *-- DietPlanMeal
+  HealthService --> Appointment

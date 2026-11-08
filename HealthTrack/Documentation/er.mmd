@@ -1,0 +1,23 @@
+erDiagram
+  ApplicationUser ||--o| ClientProfile : has
+  ApplicationUser ||--o| TrainerProfile : has
+  ApplicationUser ||--o{ TrainerAssignment : trainer
+  ApplicationUser ||--o{ TrainerAssignment : client
+  ApplicationUser ||--o{ WorkoutPlan : trainer
+  ApplicationUser ||--o{ WorkoutPlan : client
+  WorkoutPlan ||--o{ WorkoutExercise : contains
+  WorkoutPlan ||--o{ WorkoutLog : logged_against
+  ApplicationUser ||--o{ DietPlan : trainer
+  ApplicationUser ||--o{ DietPlan : client
+  DietPlan ||--o{ DietPlanMeal : contains
+  ApplicationUser ||--o{ MealLog : records
+  ApplicationUser ||--o{ HealthMetric : records
+  ApplicationUser ||--o{ Appointment : client
+  ApplicationUser ||--o{ Appointment : trainer
+  ApplicationUser ||--o{ Notification : receives
+  ApplicationUser ||--o{ TrainerFeedback : client
+  ApplicationUser ||--o{ ActivityLog : performs
+  SystemSetting {
+    string Key PK
+    string Value
+  }

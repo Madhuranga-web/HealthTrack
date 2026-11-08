@@ -1,0 +1,16 @@
+sequenceDiagram
+  actor Client
+  participant Web as AppointmentsController
+  participant Service as HealthService
+  participant DB as SQL Server
+  actor Trainer
+  Client->>Web: POST Book (trainer, UTC start, duration)
+  Web->>Service: IsAssigned / ValidBooking / HasConflict
+  Service->>DB: Query assignments and approved appointments
+  Web->>DB: Insert Pending appointment
+  Web->>DB: Insert trainer notification
+  Trainer->>Web: POST Decide Approve
+  Web->>DB: Begin serializable transaction
+  Web->>Service: HasConflict
+  Service->>DB: Query overlapping Approved appointments
+  Web->>DB: Set Approved; notify client; commit

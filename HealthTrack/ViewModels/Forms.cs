@@ -1,0 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+namespace HealthTrack.ViewModels;
+public class RegisterForm { [Required,StringLength(100)] public string FullName {get;set;}=""; [Required,EmailAddress] public string Email {get;set;}=""; [Required,MinLength(10),DataType(DataType.Password)] public string Password {get;set;}=""; [Compare(nameof(Password)),DataType(DataType.Password)] public string ConfirmPassword {get;set;}=""; }
+public class LoginForm { [Required,EmailAddress] public string Email {get;set;}=""; [Required,DataType(DataType.Password)] public string Password {get;set;}=""; public bool RememberMe {get;set;} }
+public class PlanForm { public int Id {get;set;} [Required,StringLength(120)] public string Title {get;set;}=""; [StringLength(1000)] public string Description {get;set;}=""; [Required] public string ClientId {get;set;}=""; [StringLength(120)] public string ItemName {get;set;}=""; [Range(1,30)] public int Sets {get;set;}=3; [Range(1,200)] public int Repetitions {get;set;}=10; [Range(0,240)] public int DurationMinutes {get;set;}=10; [Range(500,10000)] public int DailyCalorieTarget {get;set;}=2000; [Range(1,3000)] public int MealCalorieTarget {get;set;}=500; [Range(0,200)] public decimal ProteinGrams {get;set;}=20; [StringLength(500)] public string FoodDescription {get;set;}=""; public TimeOnly ScheduledTime {get;set;}=new(8,0); }
+public class AppointmentForm { public int Id {get;set;} [Required] public string TrainerId {get;set;}=""; [Required] public DateTime StartsUtc {get;set;} [Range(15,180)] public int DurationMinutes {get;set;}=60; [Required,StringLength(300)] public string Purpose {get;set;}=""; }
+public class MetricForm { [Range(20,500)] public decimal WeightKg {get;set;} [Range(50,250)] public decimal HeightCm {get;set;} }
+public class WorkoutLogForm { [Range(1,int.MaxValue)] public int WorkoutPlanId {get;set;} [Required,StringLength(120)] public string CompletedExercise {get;set;}=""; [Range(1,480)] public int DurationMinutes {get;set;} [Range(0,5000)] public int CaloriesBurned {get;set;} }
+public class MealLogForm { [Required,StringLength(120)] public string Food {get;set;}=""; [Range(0,5000)] public int CaloriesConsumed {get;set;} [Range(0,500)] public decimal ProteinGrams {get;set;} }
+
+public class PlanPopularity { public string Title {get;set;}=""; public int Count {get;set;} }

@@ -1,0 +1,8 @@
+flowchart LR
+  Browser[Browser: Razor + Bootstrap + Chart.js] --> MVC[ASP.NET Core MVC controllers]
+  MVC --> Identity[ASP.NET Core Identity]
+  MVC --> Service[HealthService]
+  MVC --> EF[AppDbContext / EF Core]
+  Service --> EF
+  Identity --> SQL[(SQL Server LocalDB / Express)]
+  EF --> SQL

@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.db
+*.bak
+*.pfx
+*.snk
+.env
+appsettings.*.json
+work/
+output/
