@@ -1,0 +1,27 @@
+erDiagram
+  AspNetUsers ||--o{ AspNetUserRoles : has
+  AspNetRoles ||--o{ AspNetUserRoles : grants
+  AspNetUsers ||--o{ AspNetUserClaims : has
+  AspNetUsers ||--o{ AspNetUserLogins : has
+  AspNetUsers ||--o{ AspNetUserTokens : has
+  AspNetRoles ||--o{ AspNetRoleClaims : has
+  AspNetUsers ||--o| ClientProfiles : has
+  AspNetUsers ||--o| TrainerProfiles : has
+  AspNetUsers ||--o{ TrainerAssignments : trainer
+  AspNetUsers ||--o{ TrainerAssignments : client
+  AspNetUsers ||--o{ WorkoutPlans : trainer
+  AspNetUsers ||--o{ WorkoutPlans : client
+  WorkoutPlans ||--o{ WorkoutExercises : contains
+  WorkoutPlans ||--o{ WorkoutLogs : logged_against
+  AspNetUsers ||--o{ WorkoutLogs : records
+  AspNetUsers ||--o{ DietPlans : trainer
+  AspNetUsers ||--o{ DietPlans : client
+  DietPlans ||--o{ DietPlanMeals : contains
+  AspNetUsers ||--o{ MealLogs : records
+  AspNetUsers ||--o{ HealthMetrics : records
+  AspNetUsers ||--o{ Appointments : client
+  AspNetUsers ||--o{ Appointments : trainer
+  AspNetUsers ||--o{ Notifications : receives
+  AspNetUsers ||--o{ TrainerFeedback : client
+  AspNetUsers ||--o{ TrainerFeedback : trainer
+  AspNetUsers ||--o{ ActivityLogs : performs

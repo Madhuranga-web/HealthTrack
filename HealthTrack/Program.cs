@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables(prefix: "HEALTHTRACK_");
 builder.Services.AddControllersWithViews(o => o.Filters.Add(new Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute()));
 builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(o => {
@@ -26,6 +27,7 @@ app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting(); app.UseAuthen
 app.MapControllerRoute(name:"default", pattern:"{controller=Home}/{action=Index}/{id?}");
 if (app.Environment.IsDevelopment() && app.Configuration.GetValue<bool>("SeedDemoData")) {
     using var scope = app.Services.CreateScope();
+    await scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.MigrateAsync();
     await scope.ServiceProvider.GetRequiredService<DemoSeeder>().RunAsync();
 }
 app.Run();

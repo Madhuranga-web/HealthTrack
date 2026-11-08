@@ -16,11 +16,11 @@ HealthTrack is an ASP.NET Core MVC coursework application for client fitness tra
    $env:SeedDemoData = 'true'
    dotnet run --project HealthTrack
    ```
-   Choose at least 10 characters with an uppercase letter and a digit. The password is not saved in source. Remove both environment variables after setup. For Visual Studio launching, set them in the debug environment or initialize once from the terminal, then start Visual Studio normally.
-6. Sign in as `admin@healthtrack.test`, `trainer@healthtrack.test`, or `client@healthtrack.test` with that local seed password. These accounts and data are fictional. Do not use the demo database for real health records; application-level encryption at rest is not implemented. Public registration always creates a Client.
+   Choose at least 10 characters with uppercase and lowercase letters, a digit, and a symbol. The password is not saved in source. Remove both environment variables after setup. For Visual Studio launching, set them in the debug environment or initialize once from the terminal, then start Visual Studio normally.
+6. Sign in as `admin@healthtrack.test`, either trainer (`trainer@healthtrack.test`, `trainer2@healthtrack.test`), or one of four clients (`client@healthtrack.test` through `client4@healthtrack.test`) with that local seed password. These accounts and data are fictional. Do not use the demo database for real health records; application-level encryption at rest is not implemented. Public registration always creates a Client.
 7. Run `dotnet test HealthTrack.sln` for automated tests.
 
-The demo seed invokes `Database.MigrateAsync()` only when `SeedDemoData=true` in Development. For a normal run, apply migrations before starting. The seeder is idempotent for its sample records. Do not enable it in production.
+The Development startup path invokes `Database.MigrateAsync()` and then the repeatable demo seed only when `SeedDemoData=true`. For a normal run, apply migrations before starting. The seeder is idempotent for its sample records. Do not enable it in production.
 
 ## Features
 
@@ -34,7 +34,7 @@ The demo seed invokes `Database.MigrateAsync()` only when `SeedDemoData=true` in
 
 **Time handling:** Appointment form values are UTC. The interface labels this explicitly. Only approved appointments block a time slot. Requests remain pending until a trainer approves them.
 
-See [installation and troubleshooting](HealthTrack/Documentation/Installation.md), [user manual](HealthTrack/Documentation/UserManual.md), [technical draft](HealthTrack/Documentation/TechnicalReport.md), [functional requirement map](HealthTrack/Documentation/FunctionalRequirements.md), [test checklist](HealthTrack/Documentation/Testing.md), and [viva guide](HealthTrack/Documentation/Viva.md).
+For the full database procedure, see [database setup](HealthTrack/Documentation/Database_Setup_Guide.md). See [installation and troubleshooting](HealthTrack/Documentation/Installation.md), [user manual](HealthTrack/Documentation/UserManual.md), [technical draft](HealthTrack/Documentation/TechnicalReport.md), [functional requirement map](HealthTrack/Documentation/FunctionalRequirements.md), [test checklist](HealthTrack/Documentation/Testing.md), and [viva guide](HealthTrack/Documentation/Viva.md).
 
 ## Academic integrity
 

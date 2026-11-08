@@ -32,7 +32,7 @@ Render the source diagrams in this folder: `architecture.mmd`, `er.mmd`, `use-ca
 | ActivityLog | Recorded user actions used by admin engagement chart. |
 | SystemSetting | Administrator-managed dashboard message. |
 
-Identity and app entities use primary and foreign keys. The trainer assignment pair is unique. Health metric, notification, appointment and activity queries have supporting indexes. EF maps decimal metric fields to precision 9,2. The `InitialCreate` migration is the schema source of truth.
+Identity and app entities use primary and foreign keys. The trainer assignment pair is unique. Health metric, notification, appointment and activity queries have supporting indexes. EF maps decimal metric fields to precision 9,2. The `InitialCreate` and `AddSystemSettings` migrations are the schema source of truth.
 
 ## 5. Controllers and actions
 
@@ -49,7 +49,7 @@ Identity and app entities use primary and foreign keys. The trainer assignment p
 
 ## 6. Key classes and methods
 
-`HealthService.CalculateBmi(weightKg,heightCm)` validates bounds and calculates kg/m² to one decimal. `IsAssigned(trainerId,clientId)` checks the assignment table. `ValidBooking(start,minutes,now)` checks the booking window and duration. `HasConflict` and `HasClientConflict` check overlap against Approved bookings. `Notify` and `Activity` insert event records. `DemoSeeder.RunAsync` migrates and creates fictional users and plans when explicitly enabled. `AppDbContext.OnModelCreating` configures relationships and indexes. Form classes in `ViewModels/Forms.cs` carry data annotations. `ApplicationUser` extends IdentityUser. Entity properties are documented in the table above and in `Models/Entities.cs`.
+`HealthService.CalculateBmi(weightKg,heightCm)` validates bounds and calculates kg/m² to one decimal. `IsAssigned(trainerId,clientId)` checks the assignment table. `ValidBooking(start,minutes,now)` checks the booking window and duration. `HasConflict` and `HasClientConflict` check overlap against Approved bookings. `Notify` and `Activity` insert event records. The Development startup path applies migrations before `DemoSeeder.RunAsync` creates fictional users and records when explicitly enabled. `AppDbContext.OnModelCreating` configures relationships and indexes. Form classes in `ViewModels/Forms.cs` carry data annotations. `ApplicationUser` extends IdentityUser. Entity properties are documented in the table above and in `Models/Entities.cs`.
 
 ## 7. Validation and security
 
@@ -57,7 +57,7 @@ Data annotations cover required, email, numeric range and string length fields. 
 
 ## 8. Testing approach and limitations
 
-`HealthTrack.Tests` tests BMI bounds, booking validity and conflicts, assignment checks, client and trainer access checks including assignment removal, plan input ranges and role attributes. The manual checklist is in `Testing.md`. A Linux build can compile source and tests, but LocalDB is Windows-only; run migration and full browser flow on Windows before submission. Scheduled reminders are not implemented. The current UI uses UTC appointment input. Health measurements are not encrypted at rest by the application; this fictional local demo should not hold real medical records. Notifications are event-driven and visible while the app is running. Admin reporting uses counts, popular logged routines and recent activity rather than a downloadable report file.
+`HealthTrack.Tests` tests BMI bounds, booking validity and conflicts, assignment checks, client and trainer access checks including assignment removal, plan input ranges, role attributes, the 22-table SQL Server model, and repeatable fictional seeding with Identity password hashing on relational SQLite. The manual checklist is in `Testing.md`. The Linux workspace built the solution and passed 14 tests; a temporary SQL Server container could not unpack within disk limits. Run the migration and full browser flow against Windows LocalDB or SQL Server Express before submission. Scheduled reminders are not implemented. The current UI uses UTC appointment input. Health measurements are not encrypted at rest by the application; this fictional local demo should not hold real medical records. Notifications are event-driven and visible while the app is running. Admin reporting uses counts, popular logged routines and recent activity rather than a downloadable report file.
 
 ## 9. Future improvements
 

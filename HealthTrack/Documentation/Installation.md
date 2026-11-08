@@ -18,7 +18,7 @@ The development choice is Visual Studio 2026 with .NET 10. Request lecturer conf
 5. From the solution root run `dotnet ef database update --project HealthTrack --startup-project HealthTrack`. This applies `InitialCreate` and `AddSystemSettings`.
 6. Set `SeedPassword` to a strong local password and `SeedDemoData=true` in your launch environment. Run the app once in Development. See the PowerShell example in the root README. Disable the flag after seeding.
 7. Set `HealthTrack` as startup project and press F5. If Visual Studio asks to trust the local HTTPS certificate, accept it.
-8. Use the three fictional `@healthtrack.test` accounts listed in README. Change demo passwords or delete the accounts before using a non-demo database.
+8. Use the seven fictional `@healthtrack.test` accounts listed in README. Change demo passwords or delete the accounts before using a non-demo database.
 
 Do not commit passwords or a local database. Prefer a process environment variable or Visual Studio user secrets for local settings. If using `dotnet user-secrets`, initialize a secrets ID for the web project first.
 
@@ -27,9 +27,11 @@ Do not commit passwords or a local database. Prefer a process environment variab
 | Symptom | Check |
 | --- | --- |
 | LocalDB connection fails | Install LocalDB; verify `(localdb)\\MSSQLLocalDB` is running or use SQL Express connection string. |
-| Login fails after seeding | Check the seed password and that the app ran in Development with `SeedDemoData=true`. Identity requires uppercase, digit, and 10 characters. |
+| Login fails after seeding | Check the seed password and that the app ran in Development with `SeedDemoData=true`. Identity requires uppercase, lowercase, digit, symbol, and 10 characters. |
 | Database table missing | Run `dotnet ef database update` for the same connection string the app uses. |
 | HTTPS warning | Trust the Visual Studio development certificate locally. |
 | NuGet restore fails | Check network and configured NuGet.org access; rerun `dotnet restore`. |
 | Access denied | Sign in with the proper role; trainers only see assigned clients and clients only see their own records. |
 | No chart appears | First create measurements or activity. Charts intentionally show empty states for no data. |
+
+For full database tables, migration script and SSMS checks, see [Database_Setup_Guide.md](Database_Setup_Guide.md).

@@ -2,7 +2,7 @@
 
 ## Automated tests
 
-Run `dotnet test HealthTrack.sln`. Tests cover BMI bounds and calculation, booking windows, overlapping Approved appointments, trainer assignment, client workout ownership, trainer progress access, plan numeric validation and role authorization attributes. Results should be recorded after running on your machine.
+Run `dotnet test HealthTrack.sln`. Tests cover SQL Server model mappings, repeatable fictional seeding on relational SQLite, Identity password hashing, duplicate assignment prevention, BMI bounds and calculation, booking windows, overlapping Approved appointments, trainer assignment, client workout ownership, trainer progress access, plan numeric validation and role authorization attributes. Results should be recorded after running on your machine.
 
 ## Manual end-to-end checks on Windows LocalDB
 
